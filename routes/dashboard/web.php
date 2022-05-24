@@ -2,8 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('dashboard')->name('dashboard.')->group(function () {
+Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function () {
 
-    Route::get('/index', 'DashboardController@index')->name('index');
+    Route::prefix('dashboard')->name('dashboard.')->group(function () {
+
+        Route::get('/index', 'DashboardController@index')->name('index');
+
+    });
 
 });
