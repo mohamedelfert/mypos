@@ -9,6 +9,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard.index');
+        $title = trans('site.dashboard');
+        return view('dashboard.welcome',compact('title'));
     }
 }

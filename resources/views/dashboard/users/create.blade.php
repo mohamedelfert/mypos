@@ -1,13 +1,5 @@
 @extends('layouts.dashboard.app')
 
-@section('title')
-    Title Here
-@endsection
-
-@push('css')
-    <link rel="stylesheet" href="">
-@endpush
-
 @section('content')
 
     <div class="content-wrapper">
@@ -44,7 +36,3 @@
     </div><!-- end of content wrapper -->
 
 @endsection
-
-@push('js')
-    <script>js</script>
-@endpush
