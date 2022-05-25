@@ -16,16 +16,43 @@
                 <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
                 <li class="active">{{ $title }}</li>
             </ol>
+
         </section><!-- end of content header -->
 
         <section class="content">
 
             <div class="box box-primary">
+
                 <div class="box-header with-border">
+
+                    <h4 class="box-title" style="margin-bottom: 15px;">@lang('site.users')</h4>
+                    <span><small>( {{ $users->total() }} )</small></span>
+
+                    <form action="{{ route('dashboard.users.index') }}" method="get">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="text" name="search" class="form-control" value="{{ request()->search }}" placeholder="@lang('site.search')">
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-primary btn-sm" title="@lang('site.search')">
+                                    <i class="fa fa-search"></i></button>
+                                @if(auth()->user()->hasPermission('users_create'))
+                                <a href="{{ route('dashboard.users.create')}}"
+                                   class="btn btn-success btn-sm" title="@lang('site.add')">
+                                    <i class="fa fa-plus-square"></i> / <i class="fa fa-user"></i></a>
+                                @else
+                                    <a href="#"
+                                       class="btn btn-success btn-sm disabled" title="@lang('site.add')">
+                                        <i class="fa fa-plus-square"></i> / <i class="fa fa-user"></i></a>
+                                @endif
+                            </div>
+                        </div>
+                    </form>
 
                 </div><!-- end of box header -->
 
                 <div class="box-body">
+
                     @if($users->count() > 0)
                         <table class="table table-hover">
                             <thead>
@@ -47,13 +74,26 @@
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->image }}</td>
                                     <td>
+                                        @if(auth()->user()->hasPermission('users_update'))
                                         <a href="{{ route('dashboard.users.edit',$user->id)}}"
                                            class="btn btn-primary btn-sm" title="@lang('site.edit')">
                                             <i class="fa fa-edit"></i></a>
-                                        <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                           data-toggle="modal" href="#delete{{ $user->id }}" title="@lang('site.delete')">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
+                                        @else
+                                            <a href="#"
+                                               class="btn btn-primary btn-sm disabled" title="@lang('site.edit')">
+                                                <i class="fa fa-edit"></i></a>
+                                        @endif
+
+                                        @if(auth()->user()->hasPermission('users_delete'))
+                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
+                                               data-toggle="modal" href="#delete{{ $user->id }}" title="@lang('site.delete')">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        @else
+                                            <a href="#"
+                                               class="btn btn-danger btn-sm disabled" title="@lang('site.edit')">
+                                                <i class="fa fa-edit"></i></a>
+                                        @endif
                                     </td>
                                 </tr>
 
@@ -66,7 +106,7 @@
                                                 <button aria-label="Close" class="close" data-dismiss="modal"
                                                         type="button"><span aria-hidden="true">&times;</span></button>
                                             </div>
-                                            <form action="{{ route('dashboard.users.destroy','test') }}" method="post">
+                                            <form action="{{ route('dashboard.users.destroy',$user->id) }}" method="post">
                                                 {{ method_field('delete') }}
                                                 {{ csrf_field() }}
                                                 <div class="modal-body">
@@ -108,8 +148,14 @@
                             </tbody>
                         </table>
                     @endif
+
                 </div><!-- /.box-body -->
+
             </div><!-- end of box primary -->
+
+            <ul class="pull-right">
+                {{ $users->appends(request()->input())->links() }}
+            </ul>
 
         </section><!-- end of content -->
 
