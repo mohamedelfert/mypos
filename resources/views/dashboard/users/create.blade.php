@@ -32,7 +32,7 @@
 
                 <div class="box-body">
 
-                    <form method="POST" action="{{ route('dashboard.users.store')}}">
+                    <form method="POST" action="{{ route('dashboard.users.store')}}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group">
@@ -54,6 +54,16 @@
                             <input type="email" name="email" id="email" class="form-control"
                                    value="{{ old('email') }}" placeholder="@lang('site.email')" required>
                             @error('email')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="image">@lang('site.image')</label>
+                            <input type="file" name="image" id="image" class="form-control user_image">
+                            @error('image')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
+
+                        <div class="form-group">
+                            <img class="img-responsive image_preview" style="width:100px" alt="@lang('site.image')" src="{{ asset('uploads/users_images/default.png') }}">
                         </div>
 
                         <div class="form-group">
@@ -114,3 +124,19 @@
     </div><!-- end of content wrapper -->
 
 @endsection
+
+@push('js')
+    <script type="text/javascript">
+        $('.user_image').change(function() {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('.image_preview').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    </script>
+@endpush

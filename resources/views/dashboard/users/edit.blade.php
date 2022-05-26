@@ -32,7 +32,7 @@
 
                 <div class="box-body">
 
-                    <form method="POST" action="{{ route('dashboard.users.update',$user->id)}}">
+                    <form method="POST" action="{{ route('dashboard.users.update',$user->id)}}" enctype="multipart/form-data">
                         @csrf
                         @method('patch')
 
@@ -55,6 +55,16 @@
                             <input type="email" name="email" id="email" class="form-control"
                                    value="{{ old('email',$user->email) }}" placeholder="@lang('site.email')" required>
                             @error('email')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="image">@lang('site.image')</label>
+                            <input type="file" name="image" id="image" class="form-control">
+                            @error('image')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
+
+                        <div class="form-group">
+                            <img class="img-responsive" style="width:100px" alt="@lang('site.image')" src="{{ $user->image_path }}">
                         </div>
 
                         <div class="form-group">

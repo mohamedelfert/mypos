@@ -19,6 +19,7 @@ return [
     'search' => 'بحث',
     'back' => 'رجوع',
     'read' => 'عرض',
+    'clear' => 'تفريغ',
 
     'data_added_successfully' => 'تم اضافه البيانات بنجاح',
     'data_updated_successfully' => 'تم تحديث البيانات بنجاح',
@@ -33,6 +34,7 @@ return [
     'password_confirmation' => 'تأكيد كلمه المرور',
     'permissions' => 'الصلاحيات',
     'image' => 'صوره العضو',
+    'profile' => 'حسابي',
 
     'categories' => 'الفئات',
     'clients' => 'العملاء',

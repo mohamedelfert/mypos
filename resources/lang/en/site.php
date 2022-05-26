@@ -19,6 +19,7 @@ return [
     'search' => 'Search',
     'back' => 'Back',
     'read' => 'Show',
+    'clear' => 'Clear',
 
     'data_added_successfully' => 'Data Added Successfully',
     'data_updated_successfully' => 'Data Updated Successfully',
@@ -33,6 +34,7 @@ return [
     'password_confirmation' => 'Password Confirm',
     'permissions' => 'Permissions',
     'image' => 'User Image',
+    'profile' => 'Profile',
 
     'categories' => 'Categories',
     'clients' => 'Clients',

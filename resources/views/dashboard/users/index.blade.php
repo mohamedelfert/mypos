@@ -36,6 +36,8 @@
                             <div class="col-md-4">
                                 <button class="btn btn-primary btn-sm" title="@lang('site.search')">
                                     <i class="fa fa-search"></i></button>
+                                <a class="btn btn-danger btn-sm" href="{{ route('dashboard.users.index') }}" title="@lang('site.clear')">
+                                    <i class="fa fa-eraser"></i></a>
                                 @if(auth()->user()->hasPermission('users_create'))
                                 <a href="{{ route('dashboard.users.create')}}"
                                    class="btn btn-success btn-sm" title="@lang('site.add')">
@@ -72,7 +74,10 @@
                                     <td>{{ $user->first_name }}</td>
                                     <td>{{ $user->last_name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>{{ $user->image }}</td>
+                                    <td>
+                                        <image src="{{ $user->image_path }}" class="img-thumbnail"
+                                               alt="@lang('site.image')" style="width:70px;"></image>
+                                    </td>
                                     <td>
                                         @if(auth()->user()->hasPermission('users_update'))
                                         <a href="{{ route('dashboard.users.edit',$user->id)}}"

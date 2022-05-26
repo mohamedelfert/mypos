@@ -29,7 +29,7 @@
                                 <li><!-- start message -->
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                                            <img src="{{ !empty(auth()->user()->image_path) ? auth()->user()->image_path : asset('dashboard_files/img/default.png') }}" class="img-circle" alt="User Image">
                                         </div>
                                         <h4>
                                             Support Team
@@ -92,13 +92,13 @@
                 {{--<!-- User Account: style can be found in dropdown.less -->--}}
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="{{ asset('dashboard_files/img/default.png') }}" class="user-image" alt="User Image">
+                        <img src="{{ !empty(auth()->user()->image_path) ? auth()->user()->image_path : asset('dashboard_files/img/default.png') }}" class="user-image" alt="User Image">
                         <span class="hidden-xs">{{ !empty(auth()->user()->first_name) ? auth()->user()->first_name : 'Admin' }} {{ !empty(auth()->user()->last_name) ? auth()->user()->last_name : 'Name' }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         {{--<!-- User image -->--}}
                         <li class="user-header">
-                            <img src="{{ asset('dashboard_files/img/default.png') }}" class="img-circle" alt="User Image">
+                            <img src="{{ !empty(auth()->user()->image_path) ? auth()->user()->image_path : asset('dashboard_files/img/default.png') }}" class="img-circle" alt="User Image">
                             <p>
                                 <span class="hidden-xs">{{ !empty(auth()->user()->first_name) ? auth()->user()->first_name : 'Admin' }} {{ !empty(auth()->user()->last_name) ? auth()->user()->last_name : 'Name' }}</span>
                                 <small>Member since 2 days</small>
@@ -106,6 +106,7 @@
                         </li>
                         {{--<!-- Menu Footer-->--}}
                         <li class="user-footer">
+                            <a href="#" class="btn btn-default btn-flat" style="margin-bottom:5px">@lang('site.profile')</a>
                             <a href="{{ route('logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">@lang('site.logout')</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
