@@ -12,6 +12,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         Route::resource('/users', 'UserController');
         Route::patch('/users/profile/{id}', 'UserController@profile')->name('users.profile');
 
+        // setting routes
+        Route::resource('/settings', 'SettingController');
+
     });
 
 });

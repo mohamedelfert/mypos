@@ -17,6 +17,10 @@
                 <li><a href="{{ route('dashboard.users.index') }}"><i class="fa fa-users"></i><span>@lang('site.users')</span></a></li>
             @endif
 
+            @if (auth()->user()->hasPermission('users_read'))
+                <li><a href="{{ route('dashboard.settings.index') }}"><i class="fa fa-cogs"></i><span>@lang('site.setting')</span></a></li>
+            @endif
+
             {{--<li><a href="{{ route('dashboard.categories.index') }}"><i class="fa fa-book"></i><span>@lang('site.categories')</span></a></li>--}}
             {{----}}
             {{----}}
