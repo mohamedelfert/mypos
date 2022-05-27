@@ -106,7 +106,7 @@
                         </li>
                         {{--<!-- Menu Footer-->--}}
                         <li class="user-footer">
-                            <a href="#" class="btn btn-default btn-flat" style="margin-bottom:5px">@lang('site.profile')</a>
+                            <a href="{{ route('dashboard.users.show',auth()->user()->id) }}" class="btn btn-default btn-flat" style="margin-bottom:5px">@lang('site.profile')</a>
                             <a href="{{ route('logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">@lang('site.logout')</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

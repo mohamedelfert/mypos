@@ -78,7 +78,8 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        //
+        $title = trans('site.profile');
+        return view('dashboard.users.show', compact('title', 'user'));
     }
 
 
@@ -137,5 +138,48 @@ class UserController extends Controller
         $user->delete();
         session()->flash('warning', trans('site.data_deleted_successfully'));
         return redirect()->back();
+    }
+
+    public function profile(Request $request, $id)
+    {
+        $validation = Validator::make($request->all(), [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $id,
+//            'email' => ['required', Rule::unique('users')->ignore($id)],
+            'password' => 'sometimes|nullable|confirmed',
+            'image' => 'sometimes|nullable|image|mimes:png,jpg,jpeg,gif',
+        ]);
+
+        if ($validation->fails()) {
+            return redirect()->back()->withErrors($validation)->withInput();
+        }
+
+        $data = $request->except(['password', 'password_confirmation', 'image']);
+
+        if ($request->password != null){
+            $data['password'] = bcrypt($request->password);
+        }
+
+        $user = User::findOrFail($id);
+
+        if ($request->image) {
+
+            if ($user->image != 'default.png') {
+                Storage::disk('public_uploads')->delete('/users_images/' . $user->image);
+            }
+
+            Image::make($request->image)->resize(300, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('/uploads/users_images/' . $request->image->hashName()));
+
+            $data['image'] = $request->image->hashName();
+
+        }
+
+        $user->update($data);
+
+        session()->flash('success', trans('site.data_updated_successfully'));
+        return redirect()->route('dashboard.users.index');
     }
 }

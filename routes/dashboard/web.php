@@ -10,6 +10,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
 
         // users routes
         Route::resource('/users', 'UserController');
+        Route::patch('/users/profile/{id}', 'UserController@profile')->name('users.profile');
 
     });
 
