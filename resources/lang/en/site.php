@@ -20,7 +20,7 @@ return [
     'back' => 'Back',
     'read' => 'Show',
     'clear' => 'Clear',
-    'setting' => 'Settings',
+    'settings' => 'Settings',
     'logo' => 'Logo',
     'icon' => 'Icon',
     'site_name_ar' => 'Site Name Arabic',

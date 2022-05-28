@@ -13,7 +13,7 @@
             <ol class="breadcrumb">
                 <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a>
                 </li>
-                <li class="active">@lang('site.setting')</li>
+                <li class="active">@lang('site.settings')</li>
             </ol>
         </section><!-- end of content header -->
 
@@ -101,8 +101,10 @@
                             <label for="main_lang">@lang('site.main_lang')</label>
                             <select class="form-control" id="main_lang" name="main_lang">
                                 <option value="">@lang('site.main_lang')</option>
-                                <option value="arabic" {{ setting()->main_lang == 'arabic' ? 'selected' : '' }}>@lang('site.arabic')</option>
-                                <option value="english" {{ setting()->main_lang == 'english' ? 'selected' : '' }}>@lang('site.english')</option>
+                                <option
+                                    value="arabic" {{ setting()->main_lang == 'arabic' ? 'selected' : '' }}>@lang('site.arabic')</option>
+                                <option
+                                    value="english" {{ setting()->main_lang == 'english' ? 'selected' : '' }}>@lang('site.english')</option>
                             </select>
                             @error('main_lang')<span class="text-danger">{{ $message }}</span>@enderror
                         </div>
@@ -111,8 +113,10 @@
                             <label for="status">@lang('site.status')</label>
                             <select class="form-control" id="status" name="status">
                                 <option value="">@lang('site.status')</option>
-                                <option value="open" {{ setting()->status == 'open' ? 'selected' : '' }}>@lang('site.open')</option>
-                                <option value="close" {{ setting()->status == 'close' ? 'selected' : '' }}>@lang('site.close')</option>
+                                <option
+                                    value="open" {{ setting()->status == 'open' ? 'selected' : '' }}>@lang('site.open')</option>
+                                <option
+                                    value="close" {{ setting()->status == 'close' ? 'selected' : '' }}>@lang('site.close')</option>
                             </select>
                             @error('status')<span class="text-danger">{{ $message }}</span>@enderror
                         </div>
@@ -125,7 +129,13 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="submit" value="@lang('site.update')" class="btn btn-primary btn-block">
+                            @if(auth()->user()->hasPermission('settings_update'))
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    <i class="fa fa-edit"></i> @lang('site.update')
+                                </button>
+                            @else
+                                <a class="btn btn-primary btn-block disabled"><i class="fa fa-edit"></i> @lang('site.update')</a>
+                            @endif
                         </div>
 
                     </form>

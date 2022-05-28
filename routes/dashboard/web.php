@@ -11,6 +11,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         // categories routes
         Route::resource('/categories', 'CategoryController');
 
+        // products routes
+        Route::resource('/products', 'ProductController');
+
         // users routes
         Route::resource('/users', 'UserController');
         Route::patch('/users/profile/{id}', 'UserController@profile')->name('users.profile');

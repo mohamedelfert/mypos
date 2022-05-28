@@ -11,9 +11,17 @@ use Intervention\Image\Facades\Image;
 
 class SettingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:settings_read'])->only('index');
+        $this->middleware(['permission:settings_create'])->only('create');
+        $this->middleware(['permission:settings_update'])->only('edit');
+        $this->middleware(['permission:settings_delete'])->only('destroy');
+    }
+
     public function index()
     {
-        $title = trans('site.setting');
+        $title = trans('site.settings');
         return view('dashboard.setting.index', compact('title'));
     }
 

@@ -84,7 +84,7 @@
                             <label>@lang('site.permissions')</label>
                             <div class="nav-tabs-custom">
                                 @php
-                                    $models = ['users','categories','products','orders','clients'];
+                                    $models = ['users','categories','products','orders','clients','settings'];
                                     $maps = ['create','read','update','delete'];
                                 @endphp
 
@@ -111,7 +111,13 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="submit" name="submit" value="@lang('site.add')" id="add" class="btn btn-primary btn-block">
+                            @if(auth()->user()->hasPermission('users_create'))
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    <i class="fa fa-plus"></i> @lang('site.add')
+                                </button>
+                            @else
+                                <a class="btn btn-primary btn-block disabled"><i class="fa fa-plus"></i> @lang('site.add')</a>
+                            @endif
                         </div>
 
                     </form>

@@ -42,14 +42,19 @@
                                 <label for="name">@lang('site.' . $locale . '.name')</label>
                                 <input type="text" name="{{ $locale }}[name]" id="name" class="form-control"
                                        value="{{ $category->translate($locale)->name }}"
-                                       placeholder="@lang('site.' . $locale . '.name')">
+                                       placeholder="@lang('site.' . $locale . '.name')" required>
                                 @error('name')<span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                         @endforeach
 
                         <div class="form-group">
-                            <input type="submit" value="@lang('site.update')" id="update"
-                                   class="btn btn-primary btn-block">
+                            @if(auth()->user()->hasPermission('categories_update'))
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    <i class="fa fa-edit"></i> @lang('site.update')
+                                </button>
+                            @else
+                                <a class="btn btn-primary btn-block disabled"><i class="fa fa-edit"></i> @lang('site.update')</a>
+                            @endif
                         </div>
 
                     </form>

@@ -18,11 +18,15 @@
             @endif
 
             @if (auth()->user()->hasPermission('users_read'))
-                <li><a href="{{ route('dashboard.categories.index') }}"><i class="fa fa-chevron-left"></i><span>@lang('site.categories')</span></a></li>
+                <li><a href="{{ route('dashboard.categories.index') }}"><i class="fa fa-bookmark"></i><span>@lang('site.categories')</span></a></li>
             @endif
 
             @if (auth()->user()->hasPermission('users_read'))
-                <li><a href="{{ route('dashboard.settings.index') }}"><i class="fa fa-cogs"></i><span>@lang('site.setting')</span></a></li>
+                <li><a href="{{ route('dashboard.products.index') }}"><i class="fa fa-th-list"></i><span>@lang('site.products')</span></a></li>
+            @endif
+
+            @if (auth()->user()->hasPermission('users_read'))
+                <li><a href="{{ route('dashboard.settings.index') }}"><i class="fa fa-cogs"></i><span>@lang('site.settings')</span></a></li>
             @endif
 
             {{--<li><a href="{{ route('dashboard.categories.index') }}"><i class="fa fa-book"></i><span>@lang('site.categories')</span></a></li>--}}
