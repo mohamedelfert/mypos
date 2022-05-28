@@ -26,8 +26,8 @@ return [
     'site_name_ar' => 'Site Name Arabic',
     'site_name_en' => 'Site Name English',
     'main_lang' => 'Main Language',
-    'ar' => 'Arabic',
-    'en' => 'English',
+    'arabic' => 'Arabic',
+    'english' => 'English',
     'status' => 'Status',
     'open' => 'Open',
     'close' => 'Close',
@@ -54,5 +54,14 @@ return [
     'clients' => 'Clients',
     'orders' => 'Orders',
     'products' => 'Products',
+
+    'name' => 'Name',
+
+    'ar' => [
+        'name' => 'Arabic Name',
+    ],
+    'en' => [
+        'name' => 'English Name',
+    ],
 
 ];

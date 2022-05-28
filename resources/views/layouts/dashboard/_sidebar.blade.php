@@ -18,6 +18,10 @@
             @endif
 
             @if (auth()->user()->hasPermission('users_read'))
+                <li><a href="{{ route('dashboard.categories.index') }}"><i class="fa fa-chevron-left"></i><span>@lang('site.categories')</span></a></li>
+            @endif
+
+            @if (auth()->user()->hasPermission('users_read'))
                 <li><a href="{{ route('dashboard.settings.index') }}"><i class="fa fa-cogs"></i><span>@lang('site.setting')</span></a></li>
             @endif
 

@@ -22,7 +22,7 @@ class SettingTableSeeder extends Seeder
         $data['logo'] = 'logo.jpg';
         $data['icon'] = 'icon.jpg';
         $data['email'] = 'info@app.com';
-        $data['main_lang'] = 'ar';
+        $data['main_lang'] = 'arabic';
         $data['description'] = 'This Is Simple Dashboard To Start Any Project Directly';
         $data['keywords'] = 'dashboard';
         $data['status'] = 'open';

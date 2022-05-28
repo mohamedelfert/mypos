@@ -8,6 +8,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
 
         Route::get('/index', 'DashboardController@index')->name('index');
 
+        // categories routes
+        Route::resource('/categories', 'CategoryController');
+
         // users routes
         Route::resource('/users', 'UserController');
         Route::patch('/users/profile/{id}', 'UserController@profile')->name('users.profile');

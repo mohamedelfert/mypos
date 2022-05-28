@@ -101,8 +101,8 @@
                             <label for="main_lang">@lang('site.main_lang')</label>
                             <select class="form-control" id="main_lang" name="main_lang">
                                 <option value="">@lang('site.main_lang')</option>
-                                <option value="ar" {{ setting()->main_lang == 'ar' ? 'selected' : '' }}>@lang('site.ar')</option>
-                                <option value="en" {{ setting()->main_lang == 'en' ? 'selected' : '' }}>@lang('site.en')</option>
+                                <option value="arabic" {{ setting()->main_lang == 'arabic' ? 'selected' : '' }}>@lang('site.arabic')</option>
+                                <option value="english" {{ setting()->main_lang == 'english' ? 'selected' : '' }}>@lang('site.english')</option>
                             </select>
                             @error('main_lang')<span class="text-danger">{{ $message }}</span>@enderror
                         </div>
