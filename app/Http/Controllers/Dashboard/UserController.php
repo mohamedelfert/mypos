@@ -78,6 +78,9 @@ class UserController extends Controller
 
     public function show(User $user)
     {
+        if($user->id !== auth()->user()->id){
+            abort(403);
+        }
         $title = trans('site.profile');
         return view('dashboard.users.show', compact('title', 'user'));
     }
