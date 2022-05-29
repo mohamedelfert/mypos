@@ -51,17 +51,27 @@ return [
     'profile' => 'Profile',
 
     'categories' => 'Categories',
+    'category_name' => 'Category',
     'clients' => 'Clients',
     'orders' => 'Orders',
     'products' => 'Products',
+    'product_image' => 'Product Image',
+    'purchase_price' => 'Purchasable Price',
+    'sale_price' => 'Sales Price',
+    'stock' => 'Stock',
+    'profit_percent' => 'Profit Percent %',
+    'products_count' => 'Products Count',
+    'related_products' => 'Related Products',
 
     'name' => 'Name',
 
     'ar' => [
         'name' => 'Arabic Name',
+        'description' => 'Arabic Description',
     ],
     'en' => [
         'name' => 'English Name',
+        'description' => 'English Description',
     ],
 
 ];

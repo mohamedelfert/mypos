@@ -13,19 +13,19 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li><a href="{{ route( 'dashboard.index')}}"><i class="fa fa-dashboard"></i><span>@lang('site.dashboard')</span></a></li>
 
-            @if (auth()->user()->hasPermission('users_read'))
-                <li><a href="{{ route('dashboard.users.index') }}"><i class="fa fa-users"></i><span>@lang('site.users')</span></a></li>
-            @endif
-
-            @if (auth()->user()->hasPermission('users_read'))
+            @if (auth()->user()->hasPermission('categories_read'))
                 <li><a href="{{ route('dashboard.categories.index') }}"><i class="fa fa-bookmark"></i><span>@lang('site.categories')</span></a></li>
             @endif
 
-            @if (auth()->user()->hasPermission('users_read'))
+            @if (auth()->user()->hasPermission('products_read'))
                 <li><a href="{{ route('dashboard.products.index') }}"><i class="fa fa-th-list"></i><span>@lang('site.products')</span></a></li>
             @endif
 
             @if (auth()->user()->hasPermission('users_read'))
+                <li><a href="{{ route('dashboard.users.index') }}"><i class="fa fa-users"></i><span>@lang('site.users')</span></a></li>
+            @endif
+
+            @if (auth()->user()->hasPermission('settings_read'))
                 <li><a href="{{ route('dashboard.settings.index') }}"><i class="fa fa-cogs"></i><span>@lang('site.settings')</span></a></li>
             @endif
 

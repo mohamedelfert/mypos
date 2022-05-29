@@ -51,17 +51,27 @@ return [
     'profile' => 'حسابي',
 
     'categories' => 'الاقسام',
+    'category_name' => 'القسم',
     'clients' => 'العملاء',
     'orders' => 'الطلبات',
     'products' => 'المنتجات',
+    'product_image' => 'صوره المنتج',
+    'purchase_price' => 'سعر الشراء',
+    'sale_price' => 'سعر البيع',
+    'stock' => 'المخزون',
+    'profit_percent' => 'المكسب %',
+    'products_count' => 'عدد المنتجات',
+    'related_products' => 'المنتجات المرتبطة',
 
     'name' => 'الاسم',
 
     'ar' => [
         'name' => 'الاسم باللغة العربية',
+        'description' => 'الوصف باللغة العربية',
     ],
     'en' => [
         'name' => 'الاسم باللغة الانجليزية',
+        'description' => 'الوصف باللغة الانجليزية',
     ],
 
 ];

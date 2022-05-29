@@ -21,7 +21,7 @@ class CategoryController extends Controller
     {
         $title = trans('site.categories');
         $categories = Category::When($request->search, function ($q) use ($request) {
-            return $q->where('name', 'LIKE', '%' . $request->search . '%');
+            return $q->whereTranslationLike('name', '%' . $request->search . '%');
         })->latest()->paginate(10);
         return view('dashboard.categories.index', compact('title', 'categories'));
     }
