@@ -26,10 +26,10 @@
 
                 <div class="box-header with-border">
 
-                    <h4 class="box-title" style="margin-bottom: 15px;">@lang('site.categories')</h4>
-                    <span><small>( {{ $categories->total() }} )</small></span>
+                    <h4 class="box-title" style="margin-bottom: 15px;">@lang('site.clients')</h4>
+                    <span><small>( {{ $clients->total() }} )</small></span>
 
-                    <form action="{{ route('dashboard.categories.index') }}" method="get">
+                    <form action="{{ route('dashboard.clients.index') }}" method="get">
                         <div class="row">
                             <div class="col-md-4">
                                 <input type="text" name="search" class="form-control" value="{{ request()->search }}"
@@ -38,11 +38,11 @@
                             <div class="col-md-4">
                                 <button class="btn btn-primary btn-sm" title="@lang('site.search')">
                                     <i class="fa fa-search"></i></button>
-                                <a class="btn btn-danger btn-sm" href="{{ route('dashboard.categories.index') }}"
+                                <a class="btn btn-danger btn-sm" href="{{ route('dashboard.clients.index') }}"
                                    title="@lang('site.clear')">
                                     <i class="fa fa-eraser"></i></a>
-                                @if(auth()->user()->hasPermission('categories_create'))
-                                    <a href="{{ route('dashboard.categories.create')}}"
+                                @if(auth()->user()->hasPermission('clients_create'))
+                                    <a href="{{ route('dashboard.clients.create')}}"
                                        class="btn btn-success btn-sm" title="@lang('site.add')">
                                         <i class="fa fa-plus-square"></i> / <i class="fa fa-user"></i>
                                     </a>
@@ -59,31 +59,29 @@
 
                 <div class="box-body">
 
-                    @if($categories->count() > 0)
+                    @if($clients->count() > 0)
                         <table class="table table-hover">
                             <thead>
                             <tr>
                                 <th>#</th>
                                 <th>@lang('site.name')</th>
-                                <th>@lang('site.products_count')</th>
-                                <th>@lang('site.related_products')</th>
+                                <th>@lang('site.phone')</th>
+                                <th>@lang('site.email')</th>
+                                <th>@lang('site.address')</th>
                                 <th>@lang('site.control')</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($categories as $index => $category)
+                            @foreach($clients as $index => $client)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $category->name }}</td>
-                                    <td>{{ $category->products->count() }}</td>
+                                    <td>{{ $client->name }}</td>
+                                    <td>{{ is_array($client->phone) ? implode(' / ', $client->phone) : $client->phone }}</td>
+                                    <td>{{ $client->email }}</td>
+                                    <td>{{ $client->address }}</td>
                                     <td>
-                                        <a href="{{ route('dashboard.products.index',['category_id' => $category->id])}}"
-                                           class="btn btn-info btn-sm">
-                                            @lang('site.related_products') <i class="fa fa-eye"></i></a>
-                                    </td>
-                                    <td>
-                                        @if(auth()->user()->hasPermission('categories_update'))
-                                            <a href="{{ route('dashboard.categories.edit',$category->id)}}"
+                                        @if(auth()->user()->hasPermission('clients_update'))
+                                            <a href="{{ route('dashboard.clients.edit',$client->id)}}"
                                                class="btn btn-primary btn-sm" title="@lang('site.edit')">
                                                 <i class="fa fa-edit"></i></a>
                                         @else
@@ -92,9 +90,9 @@
                                                 <i class="fa fa-edit"></i></a>
                                         @endif
 
-                                        @if(auth()->user()->hasPermission('categories_delete'))
+                                        @if(auth()->user()->hasPermission('clients_delete'))
                                             <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                               data-toggle="modal" href="#delete{{ $category->id }}"
+                                               data-toggle="modal" href="#delete{{ $client->id }}"
                                                title="@lang('site.delete')">
                                                 <i class="fa fa-trash"></i>
                                             </a>
@@ -107,7 +105,7 @@
                                 </tr>
 
                                 <!-- Delete -->
-                                <div class="modal fade" id="delete{{ $category->id }}">
+                                <div class="modal fade" id="delete{{ $client->id }}">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content modal-content-demo">
                                             <div class="modal-header">
@@ -115,15 +113,15 @@
                                                 <button aria-label="Close" class="close" data-dismiss="modal"
                                                         type="button"><span aria-hidden="true">&times;</span></button>
                                             </div>
-                                            <form action="{{ route('dashboard.categories.destroy',$category->id) }}"
+                                            <form action="{{ route('dashboard.clients.destroy',$client->id) }}"
                                                   method="post">
                                                 {{ method_field('delete') }}
                                                 {{ csrf_field() }}
                                                 <div class="modal-body">
                                                     <p>@lang('site.msg_delete')</p><br>
-                                                    <input type="hidden" name="id" id="id" value="{{ $category->id }}">
+                                                    <input type="hidden" name="id" id="id" value="{{ $client->id }}">
                                                     <input class="form-control" name="name" id="name" type="text"
-                                                           value="{{ $category->name }}" readonly>
+                                                           value="{{ $client->name }}" readonly>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
@@ -145,14 +143,15 @@
                             <tr>
                                 <th>#</th>
                                 <th>@lang('site.name')</th>
-                                <th>@lang('site.products_count')</th>
-                                <th>@lang('site.related_products')</th>
+                                <th>@lang('site.phone')</th>
+                                <th>@lang('site.email')</th>
+                                <th>@lang('site.address')</th>
                                 <th>@lang('site.control')</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td colspan="5" class="text-center text-danger">@lang('site.no_data_found')</td>
+                                <td colspan="6" class="text-center text-danger">@lang('site.no_data_found')</td>
                             </tr>
                             </tbody>
                         </table>
@@ -163,7 +162,7 @@
             </div><!-- end of box primary -->
 
             <ul class="pull-right">
-                {{ $categories->appends(request()->input())->links() }}
+                {{ $clients->appends(request()->input())->links() }}
             </ul>
 
         </section><!-- end of content -->

@@ -64,6 +64,8 @@ return [
     'related_products' => 'Related Products',
 
     'name' => 'Name',
+    'phone' => 'Phone',
+    'address' => 'Address',
 
     'ar' => [
         'name' => 'Arabic Name',
