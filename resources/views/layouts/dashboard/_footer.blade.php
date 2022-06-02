@@ -3,7 +3,7 @@
                     <b>Version</b> 1.0
                 </div>
                 <strong>Copyright &copy; 2022-2023
-                    <a href=""><b>Dash</b>Board</a>.</strong> All rights reserved.
+                    <a href=""><b>Mohamed</b> Ibrahiem</a>.</strong> All rights reserved.
             </footer>
 
         </div><!-- end of wrapper -->

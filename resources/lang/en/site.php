@@ -66,6 +66,11 @@ return [
     'name' => 'Name',
     'phone' => 'Phone',
     'address' => 'Address',
+    'add_order' => 'Add Order',
+    'price' => 'Price',
+    'quantity' => 'Quantity',
+    'product' => 'Product',
+    'total' => 'Total',
 
     'ar' => [
         'name' => 'Arabic Name',

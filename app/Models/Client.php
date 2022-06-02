@@ -21,4 +21,9 @@ class Client extends Model
     {
         return ucfirst($value);
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

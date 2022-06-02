@@ -61,7 +61,7 @@
                                                                 <td>{{ $index++ }}</td>
                                                                 <td>{{ $product->name }}</td>
                                                                 <td>{{ $product->stock }}</td>
-                                                                <td>{{ $product->sale_price }}</td>
+                                                                <td>{{ number_format($product->sale_price, 2) }}</td>
                                                                 <td>
                                                                     <a href="#"
                                                                        id="product-{{ $product->id }}"
@@ -128,13 +128,17 @@
                                     </tr>
                                     </thead>
                                     <tbody class="order_list">
-
+                                        <tr class="data_not_found">
+                                            <td colspan="4" class="text-center text-danger">
+                                                @lang('site.no_data_found')
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                 <hr>
                                 <h4>@lang('site.total') : <span class="total_price"> 0 </span></h4>
                                 <hr>
-                                <button type="submit" class="btn btn-primary btn-block disabled">
+                                <button type="submit" id="add_order_product_btn" class="btn btn-primary btn-block disabled">
                                     <i class="fa fa-plus"></i> @lang('site.add_order')
                                 </button>
                             </form>
@@ -163,9 +167,14 @@
 
                 $(this).removeClass('btn-success').addClass('btn-default disabled');
 
+                $('.data_not_found').addClass('hidden');
+
+                //$('#add_order_product_btn').removeClass('disabled');
+
                 var html =
                     '<tr>' +
                         '<td>' + name + '</td>' +
+                        '<td><input type="hidden" name="products[]" value="'+ price +'"></td>' +
                         '<td><input type="number" name="quantities[]" data-price="'+ price +'" class="form-control product_quantity" value="1" min="1"></td>' +
                         '<td class="product_price">' + price + '</td>' +
                         '<td><button class="btn btn-danger btn-sm remove_product_btn" data-id="'+ id +'"><i class="fa fa-trash"></i></button></td>' +
@@ -187,6 +196,10 @@
                 event.preventDefault();
                 $(this).closest('tr').remove();
 
+                $('.data_not_found').removeClass('hidden');
+
+                //$('#add_order_product_btn').addClass('disabled');
+
                 var id = $(this).data('id');
                 $('#product-' + id).removeClass('btn-default disabled').addClass('btn-success');
 
@@ -196,7 +209,7 @@
             // this for change product quantity
             $(document).on('keyup change', '.product_quantity', function (){
                 var quantity = parseInt($(this).val());
-                var unitPrice = $(this).data('price');
+                var unitPrice = parseFloat($(this).data('price').replace(/,/g, ''));
                 $(this).closest('tr').find('.product_price').html($.number(quantity * unitPrice , 2));
                 calculateTotal();
             });
@@ -213,6 +226,12 @@
             })
 
             $('.total_price').html($.number(price , 2));
+
+            if (price > 0){
+                $('#add_order_product_btn').removeClass('disabled');
+            }else{
+                $('#add_order_product_btn').addClass('disabled');
+            }
 
         }
     </script>
