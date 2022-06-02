@@ -30,7 +30,6 @@
                 </div><!-- end of row -->
 
                 <div class="box-body">
-
                     <div class="box-header">
                         <h3 class="box-title">Title Of Content Here</h3>
                     </div>
@@ -38,8 +37,7 @@
                         <h3 class="box-body">Body Of Content Here</h3>
                         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                     </div>
-                    <!-- /.box-body -->
-                </div>
+                </div> <!-- /.box-body -->
             </div>
 
         </section><!-- end of content -->

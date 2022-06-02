@@ -68,6 +68,7 @@
                                 <th>@lang('site.phone')</th>
                                 <th>@lang('site.email')</th>
                                 <th>@lang('site.address')</th>
+                                <th>@lang('site.orders')</th>
                                 <th>@lang('site.control')</th>
                             </tr>
                             </thead>
@@ -79,6 +80,17 @@
                                     <td>{{ is_array($client->phone) ? implode(' / ', $client->phone) : $client->phone }}</td>
                                     <td>{{ $client->email }}</td>
                                     <td>{{ $client->address }}</td>
+                                    <td>
+                                        @if(auth()->user()->hasPermission('orders_create'))
+                                            <a href="{{ route('dashboard.clients.orders.create',$client->id)}}"
+                                               class="btn btn-info btn-sm" title="@lang('site.add_order')">
+                                                @lang('site.add_order') <i class="fa fa-plus"></i></a>
+                                        @else
+                                            <a href="#"
+                                               class="btn btn-info btn-sm disabled" title="@lang('site.add_order')">
+                                                @lang('site.add_order') <i class="fa fa-plus"></i></a>
+                                        @endif
+                                    </td>
                                     <td>
                                         @if(auth()->user()->hasPermission('clients_update'))
                                             <a href="{{ route('dashboard.clients.edit',$client->id)}}"
