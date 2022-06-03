@@ -108,6 +108,7 @@
 
                 <!-- Start Orders -->
                 <div class="col-md-6">
+
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title" style="margin-bottom: 10px">@lang('site.orders')</h3>
@@ -128,17 +129,18 @@
                                     </tr>
                                     </thead>
                                     <tbody class="order_list">
-                                        <tr class="data_not_found">
-                                            <td colspan="4" class="text-center text-danger">
-                                                @lang('site.no_data_found')
-                                            </td>
-                                        </tr>
+                                    <tr class="data_not_found">
+                                        <td colspan="4" class="text-center text-danger">
+                                            @lang('site.no_data_found')
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                                 <hr>
                                 <h4>@lang('site.total') : <span class="total_price"> 0 </span></h4>
                                 <hr>
-                                <button type="submit" id="add_order_product_btn" class="btn btn-primary btn-block disabled">
+                                <button type="submit" id="add_order_product_btn"
+                                        class="btn btn-primary btn-block disabled">
                                     <i class="fa fa-plus"></i> @lang('site.add_order')
                                 </button>
                             </form>
@@ -163,7 +165,7 @@
                 event.preventDefault();
                 var id = $(this).data('id');
                 var name = $(this).data('name');
-                var price = $.number($(this).data('price') , 2);
+                var price = $.number($(this).data('price'), 2);
 
                 $(this).removeClass('btn-success').addClass('btn-default disabled');
 
@@ -171,15 +173,24 @@
 
                 //$('#add_order_product_btn').removeClass('disabled');
 
+                // var html =
+                //     '<tr>' +
+                //         '<td>' + name + '</td>' +
+                //         '<td><input type="hidden" name="product_ids[]" value="'+ id +'"></td>' +
+                //         '<td><input type="number" name="quantities[]" data-price="'+ price +'" class="form-control product_quantity" value="1" min="1"></td>' +
+                //         '<td class="product_price">' + price + '</td>' +
+                //         '<td><button class="btn btn-danger btn-sm remove_product_btn" data-id="'+ id +'"><i class="fa fa-trash"></i></button></td>' +
+                //     '</tr>'
+                // ;
+
+                // or use this
                 var html =
-                    '<tr>' +
-                        '<td>' + name + '</td>' +
-                        '<td><input type="hidden" name="products[]" value="'+ price +'"></td>' +
-                        '<td><input type="number" name="quantities[]" data-price="'+ price +'" class="form-control product_quantity" value="1" min="1"></td>' +
-                        '<td class="product_price">' + price + '</td>' +
-                        '<td><button class="btn btn-danger btn-sm remove_product_btn" data-id="'+ id +'"><i class="fa fa-trash"></i></button></td>' +
-                    '</tr>'
-                ;
+                    `<tr>
+                        <td>${name}</td>
+                        <td><input type="number" name="products[${id}][quantity]" data-price="${price}" class="form-control product_quantity" value="1" min="1"></td>
+                        <td class="product_price">${price}</td>
+                        <td><button class="btn btn-danger btn-sm remove_product_btn" data-id="${id}"><i class="fa fa-trash"></i></button></td>
+                    </tr>`;
 
                 $('.order_list').append(html);
 
@@ -187,7 +198,7 @@
             })
 
             // this for disabled btn
-            $('body').on('click', '.disabled',function(event) {
+            $('body').on('click', '.disabled', function (event) {
                 event.preventDefault();
             });
 
@@ -207,17 +218,17 @@
             });
 
             // this for change product quantity
-            $(document).on('keyup change', '.product_quantity', function (){
+            $(document).on('keyup change', '.product_quantity', function () {
                 var quantity = parseInt($(this).val());
                 var unitPrice = parseFloat($(this).data('price').replace(/,/g, ''));
-                $(this).closest('tr').find('.product_price').html($.number(quantity * unitPrice , 2));
+                $(this).closest('tr').find('.product_price').html($.number(quantity * unitPrice, 2));
                 calculateTotal();
             });
 
         });
 
         // this for calculate total price
-        function calculateTotal(){
+        function calculateTotal() {
 
             var price = 0;
 
@@ -225,11 +236,11 @@
                 price += parseFloat($(this).html().replace(/,/g, ''));
             })
 
-            $('.total_price').html($.number(price , 2));
+            $('.total_price').html($.number(price, 2));
 
-            if (price > 0){
+            if (price > 0) {
                 $('#add_order_product_btn').removeClass('disabled');
-            }else{
+            } else {
                 $('#add_order_product_btn').addClass('disabled');
             }
 
