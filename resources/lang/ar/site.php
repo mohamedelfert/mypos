@@ -13,6 +13,8 @@ return [
     'update' => 'تحديث',
     'create' => 'اضافه',
     'delete' => 'حذف',
+    'show' => 'عرض',
+    'print' => 'طباعه',
     'control' => 'تحكم',
     'confirm' => 'تأكيد',
     'cancel' => 'الغاء',
@@ -71,6 +73,13 @@ return [
     'quantity' => 'الكميه',
     'product' => 'المنتج',
     'total' => 'المجموع',
+
+    'show_products' => 'عرض المنتجات',
+    'client_name' => 'اسم العميل',
+    'add_date' => 'وقت الطلب / إضافة',
+    'order_number' => 'رقم الطلب',
+    'order_status' => 'حاله الطلب',
+    'loading' => 'جاري تحميل البيانات',
 
     'ar' => [
         'name' => 'الاسم باللغة العربية',

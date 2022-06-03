@@ -108,7 +108,6 @@
 
                 <!-- Start Orders -->
                 <div class="col-md-6">
-
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title" style="margin-bottom: 10px">@lang('site.orders')</h3>

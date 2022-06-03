@@ -85,7 +85,7 @@ class OrderController extends Controller
         $order->update(['total_price' => $total_price]);
 
         session()->flash('success', trans('site.data_added_successfully'));
-        return redirect()->route('dashboard.clients.index');
+        return redirect()->route('dashboard.orders.index');
     }
 
     public function show(Order $order, Client $client)

@@ -18,6 +18,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         Route::resource('/clients', 'ClientController');
         Route::resource('/clients.orders', 'Client\OrderController');
 
+        // orders route
+        Route::resource('/orders', 'OrderController');
+        Route::get('/orders/{order}/products', 'OrderController@products')->name('orders.products');
+
         // users routes
         Route::resource('/users', 'UserController');
         Route::patch('/users/profile/{id}', 'UserController@profile')->name('users.profile');

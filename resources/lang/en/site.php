@@ -13,6 +13,8 @@ return [
     'update' => 'Update',
     'create' => 'Adding',
     'delete' => 'Delete',
+    'print' => 'Print',
+    'show' => 'Show',
     'control' => 'Control',
     'confirm' => 'Confirm',
     'cancel' => 'Cancel',
@@ -71,6 +73,13 @@ return [
     'quantity' => 'Quantity',
     'product' => 'Product',
     'total' => 'Total',
+
+    'show_products' => 'Show Products',
+    'client_name' => 'Client Name',
+    'add_date' => 'Order Date / Add',
+    'order_number' => 'Order Number',
+    'order_status' => 'Order Status',
+    'loading' => 'Data Is Being Loading',
 
     'ar' => [
         'name' => 'Arabic Name',
