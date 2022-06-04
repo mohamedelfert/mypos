@@ -29,7 +29,7 @@
         {{--print this--}}
         <script src="{{ asset('dashboard_files/js/printThis.js') }}"></script>
 
-        {{--morris --}}
+        {{-- Morris.js charts --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
         <script src="{{ asset('dashboard_files/plugins/morris/morris.min.js') }}"></script>
 

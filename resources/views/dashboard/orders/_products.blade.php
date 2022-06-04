@@ -20,6 +20,6 @@
 <h4>@lang('site.total') : <span class="total_price"> {{ number_format($order->total_price, 2) }} </span></h4>
 <hr>
 <button type="submit" id="order_print_btn"
-        class="btn btn-primary btn-block print_btn">
+        class="btn btn-primary btn-block print_btn" onclick="orderPrint()">
     <i class="fa fa-print"></i> @lang('site.print')
 </button>

@@ -69,6 +69,8 @@ return [
     'phone' => 'Phone',
     'address' => 'Address',
     'add_order' => 'Add Order',
+    'edit_order' => 'Edit Order',
+    'previous_orders' => 'Previous Orders',
     'price' => 'Price',
     'quantity' => 'Quantity',
     'product' => 'Product',
@@ -80,6 +82,7 @@ return [
     'order_number' => 'Order Number',
     'order_status' => 'Order Status',
     'loading' => 'Data Is Being Loading',
+    'statistics' => 'Statistics',
 
     'ar' => [
         'name' => 'Arabic Name',

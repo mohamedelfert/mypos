@@ -69,6 +69,8 @@ return [
     'phone' => 'الهاتف',
     'address' => 'العنوان',
     'add_order' => 'إضافة طلب',
+    'edit_order' => 'تعديل طلب',
+    'previous_orders' => 'الطلبات السابقة',
     'price' => 'السعر',
     'quantity' => 'الكميه',
     'product' => 'المنتج',
@@ -80,6 +82,7 @@ return [
     'order_number' => 'رقم الطلب',
     'order_status' => 'حاله الطلب',
     'loading' => 'جاري تحميل البيانات',
+    'statistics' => 'الإحصائيات',
 
     'ar' => [
         'name' => 'الاسم باللغة العربية',

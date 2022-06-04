@@ -4,6 +4,14 @@
     {{ $title }}
 @endsection
 
+@push('css')
+    <style>
+        @media print {
+            .print_btn {display: none}
+        }
+    </style>
+@endpush
+
 @section('content')
 
     <div class="content-wrapper">
@@ -85,7 +93,7 @@
                                             </td>
                                             <td>
                                                 @if(auth()->user()->hasPermission('orders_update'))
-                                                    <a href="{{ route('dashboard.orders.edit',$order->id)}}"
+                                                    <a href="{{ route('dashboard.clients.orders.edit',['client' => $order->client->id , 'order' => $order->id]) }}"
                                                        class="btn btn-primary btn-sm" title="@lang('site.edit')">
                                                         <i class="fa fa-edit"></i></a>
                                                 @else
@@ -182,7 +190,7 @@
                 <!-- End Orders -->
 
                 <!-- Start Products -->
-                <div class="col-md-4">
+                <div class="col-md-4" id="print">
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title" style="margin-bottom: 10px">@lang('site.show_products')</h3>
@@ -238,5 +246,12 @@
             });
 
         });
+
+        function orderPrint(){
+            var content = document.getElementById('print').innerHTML;
+            document.body.innerHTML = content;
+            window.print();
+            location.reload();
+        }
     </script>
 @endpush

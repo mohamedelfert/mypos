@@ -108,6 +108,7 @@
 
                 <!-- Start Orders -->
                 <div class="col-md-6">
+                    <!-- Start Orders -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title" style="margin-bottom: 10px">@lang('site.orders')</h3>
@@ -136,7 +137,7 @@
                                     </tbody>
                                 </table>
                                 <hr>
-                                <h4>@lang('site.total') : <span class="total_price"> 0 </span></h4>
+                                <h4>@lang('site.total') : <span class="total_price"> 0 EGP</span></h4>
                                 <hr>
                                 <button type="submit" id="add_order_product_btn"
                                         class="btn btn-primary btn-block disabled">
@@ -145,6 +146,82 @@
                             </form>
                         </div><!-- /.box-body -->
                     </div>
+                    <!-- Start Orders -->
+
+                    <!-- Start Previous Orders -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title" style="margin-bottom: 10px">@lang('site.previous_orders')</h3>
+                        </div>
+
+                        <div class="box-body">
+                            @if($client->orders->count() > 0)
+                                @foreach($orders as $order)
+                                    <div class="panel-group">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse"
+                                                       href="#{{ $order->id }}">{{ $order->created_at->toFormattedDateString() }}</a>
+                                                </h4>
+                                            </div>
+                                            <div id="{{ $order->id }}"
+                                                 class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    <table class="table table-hover">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>@lang('site.name')</th>
+                                                            <th>@lang('site.price')</th>
+                                                            <th>@lang('site.quantity')</th>
+                                                            <th>@lang('site.total')</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach($order->products as $index => $product)
+                                                            <tr>
+                                                                <th>{{ $index++ }}</th>
+                                                                <th>{{ $product->name }}</th>
+                                                                <th>{{ $product->sale_price }}</th>
+                                                                <th>{{ $product->pivot->quantity }}</th>
+                                                                <th>{{ $product->pivot->quantity * $product->sale_price }}</th>
+                                                            </tr>
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                    <hr>
+                                                    <h4>@lang('site.total') : <span>{{ $order->total_price }} EGP</span></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>@lang('site.name')</th>
+                                        <th>@lang('site.price')</th>
+                                        <th>@lang('site.quantity')</th>
+                                        <th>@lang('site.total')</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td colspan="5" class="text-center text-danger">
+                                            @lang('site.no_data_found')
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <hr>
+                                <h4>@lang('site.total') : <span>0 EGP</span></h4>
+                            @endif
+                        </div><!-- /.box-body -->
+                    </div>
+                    <!-- Start Previous Orders -->
                 </div>
                 <!-- End Orders -->
             </div>

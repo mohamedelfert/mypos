@@ -17,32 +17,33 @@
             <h1>{{ $title }}</h1>
 
             <ol class="breadcrumb">
-                <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
+                <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a>
+                </li>
                 <li class="active">{{ $title }}</li>
             </ol>
         </section>
 
-{{--        <section class="content">--}}
+        {{--        <section class="content">--}}
 
-{{--            <div class="box box-primary">--}}
-{{--                <div class="box-header with-border">--}}
+        {{--            <div class="box box-primary">--}}
+        {{--                <div class="box-header with-border">--}}
 
-{{--                </div><!-- end of row -->--}}
+        {{--                </div><!-- end of row -->--}}
 
-{{--                <div class="box-body">--}}
+        {{--                <div class="box-body">--}}
 
-{{--                    <div class="box-header">--}}
-{{--                        <h3 class="box-title">Title Of Content Here</h3>--}}
-{{--                    </div>--}}
-{{--                    <div class="box-body border-radius-none ht-300">--}}
-{{--                        <h3 class="box-body">Body Of Content Here</h3>--}}
-{{--                        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>--}}
-{{--                    </div>--}}
-{{--                    <!-- /.box-body -->--}}
-{{--                </div>--}}
-{{--            </div>--}}
+        {{--                    <div class="box-header">--}}
+        {{--                        <h3 class="box-title">Title Of Content Here</h3>--}}
+        {{--                    </div>--}}
+        {{--                    <div class="box-body border-radius-none ht-300">--}}
+        {{--                        <h3 class="box-body">Body Of Content Here</h3>--}}
+        {{--                        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>--}}
+        {{--                    </div>--}}
+        {{--                    <!-- /.box-body -->--}}
+        {{--                </div>--}}
+        {{--            </div>--}}
 
-{{--        </section><!-- end of content -->--}}
+        {{--        </section><!-- end of content -->--}}
 
         <section class="content">
 
@@ -52,13 +53,14 @@
                 <div class="col-lg-3 col-xs-6">
                     <div class="small-box bg-aqua">
                         <div class="inner">
-                            <h3>10</h3>
+                            <h3>{{ $categories_count }}</h3>
                             <p>@lang('site.categories')</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
                         </div>
-                        <a href="#" class="small-box-footer">@lang('site.read') <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('dashboard.categories.index')}}" class="small-box-footer">@lang('site.read')
+                            <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
 
@@ -66,13 +68,14 @@
                 <div class="col-lg-3 col-xs-6">
                     <div class="small-box bg-green">
                         <div class="inner">
-                            <h3>100</h3>
+                            <h3>{{ $products_count }}</h3>
                             <p>@lang('site.products')</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="#" class="small-box-footer">@lang('site.read') <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('dashboard.products.index') }}" class="small-box-footer">@lang('site.read') <i
+                                class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
 
@@ -80,13 +83,13 @@
                 <div class="col-lg-3 col-xs-6">
                     <div class="small-box bg-red">
                         <div class="inner">
-                            <h3>30</h3>
+                            <h3>{{ $clients_count }}</h3>
                             <p>@lang('site.clients')</p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-user"></i>
                         </div>
-                        <a href="#" class="small-box-footer">
+                        <a href="{{ route('dashboard.clients.index') }}" class="small-box-footer">
                             @lang('site.read') <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
@@ -95,7 +98,7 @@
                 <div class="col-lg-3 col-xs-6">
                     <div class="small-box bg-yellow">
                         <div class="inner">
-                            <h3>{{ App\Models\User::count() }}</h3>
+                            <h3>{{ $users_count }}</h3>
                             <p>@lang('site.users')</p>
                         </div>
                         <div class="icon">
@@ -110,11 +113,10 @@
 
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Title Of Content Here</h3>
+                    <h3 class="box-title">@lang('site.statistics')</h3>
                 </div>
                 <div class="box-body border-radius-none">
-                    <h3 class="box-body">Body Of Content Here</h3>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+                    <div class="chart" id="line-chart" style="height: 330px;"></div>
                 </div>
             </div><!-- /.box-body -->
 
@@ -125,5 +127,28 @@
 @endsection
 
 @section('js')
-
+    <script>
+        var line = new Morris.Line({
+            element: 'line-chart',
+            resize: true,
+            data: [
+                @foreach($sales_data as $data)
+                    {ym: '{{ $data->year }} - {{ $data->month }}', sum: {{ $data->sum }}},
+                @endforeach
+            ],
+            xkey: 'ym',
+            ykeys: ['sum'],
+            labels: ['@lang('site.total')'],
+            lineColors: ['#efefef'],
+            lineWidth: 2,
+            hideHover: 'auto',
+            gridTextColor: '#fff',
+            gridStrokeWidth: 0.4,
+            pointSize: 4,
+            pointStrokeColors: ['#efefef'],
+            gridLineColor: '#efefef',
+            gridTextFamily: 'Open Sans',
+            gridTextSize: 10
+        });
+    </script>
 @endsection

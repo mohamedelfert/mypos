@@ -12,16 +12,12 @@ use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
-    public function index()
-    {
-        //
-    }
-
     public function create(Client $client)
     {
         $title = trans('site.orders');
         $categories = Category::with('products')->get();
-        return view('dashboard.clients.orders.create', compact('title', 'categories', 'client'));
+        $orders = $client->orders()->with('products')->paginate(5);
+        return view('dashboard.clients.orders.create', compact('title', 'categories', 'client','orders'));
     }
 
     public function store(Request $request, Client $client)
@@ -58,6 +54,14 @@ class OrderController extends Controller
         */
 
         // Second way
+        $this->attachOrder($request, $client);
+
+        session()->flash('success', trans('site.data_added_successfully'));
+        return redirect()->route('dashboard.orders.index');
+    }
+
+    private function attachOrder($request, $client)
+    {
         $validation = Validator::make($request->all(), [
             'products' => 'required|array',
         ]);
@@ -83,28 +87,36 @@ class OrderController extends Controller
         }
 
         $order->update(['total_price' => $total_price]);
+    }
 
-        session()->flash('success', trans('site.data_added_successfully'));
+    public function edit(Client $client, Order $order)
+    {
+        $title = trans('site.orders');
+        $categories = Category::with('products')->get();
+        $orders = $client->orders()->with('products')->paginate(5);
+        return view('dashboard.clients.orders.edit', compact('title', 'categories', 'client','order', 'orders'));
+    }
+
+    public function update(Request $request, Client $client, Order $order)
+    {
+        // delete old order
+        $this->dattachOrder($order);
+
+        // create new order
+        $this->attachOrder($request, $client);
+
+        session()->flash('success', trans('site.data_updated_successfully_successfully'));
         return redirect()->route('dashboard.orders.index');
     }
 
-    public function show(Order $order, Client $client)
+    private function dattachOrder($order)
     {
-        //
-    }
+        foreach ($order->products as $product) {
+            $product->update([
+                'stock' => $product->stock + $product->pivot->quantity,
+            ]);
+        }
 
-    public function edit(Order $order, Client $client)
-    {
-        //
-    }
-
-    public function update(Request $request, Order $order, Client $client)
-    {
-        //
-    }
-
-    public function destroy(Order $order, Client $client)
-    {
-        //
+        $order->delete();
     }
 }
