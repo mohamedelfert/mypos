@@ -116,6 +116,7 @@
                     <h3 class="box-title">@lang('site.statistics')</h3>
                 </div>
                 <div class="box-body border-radius-none">
+                    {{ $sales_data }}
                     <div class="chart" id="line-chart" style="height: 330px;"></div>
                 </div>
             </div><!-- /.box-body -->
