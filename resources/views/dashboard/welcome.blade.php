@@ -128,28 +128,28 @@
 @endsection
 
 @section('js')
-    <script>
-        var line = new Morris.Line({
-            element: 'line-chart',
-            resize: true,
-            data: [
-                @foreach($sales_data as $data)
-                    {ym: '{{ $data->year }} - {{ $data->month }}', sum: {{ $data->sum }}},
-                @endforeach
-            ],
-            xkey: 'ym',
-            ykeys: ['sum'],
-            labels: ['@lang('site.total')'],
-            lineColors: ['#efefef'],
-            lineWidth: 2,
-            hideHover: 'auto',
-            gridTextColor: '#fff',
-            gridStrokeWidth: 0.4,
-            pointSize: 4,
-            pointStrokeColors: ['#efefef'],
-            gridLineColor: '#efefef',
-            gridTextFamily: 'Open Sans',
-            gridTextSize: 10
-        });
-    </script>
+{{--    <script>--}}
+{{--        var line = new Morris.Line({--}}
+{{--            element: 'line-chart',--}}
+{{--            resize: true,--}}
+{{--            data: [--}}
+{{--                @foreach($sales_data as $data)--}}
+{{--                    {ym: '{{ $data->year }} - {{ $data->month }}', sum: {{ $data->sum }}},--}}
+{{--                @endforeach--}}
+{{--            ],--}}
+{{--            xkey: 'ym',--}}
+{{--            ykeys: ['sum'],--}}
+{{--            labels: ['@lang('site.total')'],--}}
+{{--            lineColors: ['#efefef'],--}}
+{{--            lineWidth: 2,--}}
+{{--            hideHover: 'auto',--}}
+{{--            gridTextColor: '#fff',--}}
+{{--            gridStrokeWidth: 0.4,--}}
+{{--            pointSize: 4,--}}
+{{--            pointStrokeColors: ['#efefef'],--}}
+{{--            gridLineColor: '#efefef',--}}
+{{--            gridTextFamily: 'Open Sans',--}}
+{{--            gridTextSize: 10--}}
+{{--        });--}}
+{{--    </script>--}}
 @endsection
